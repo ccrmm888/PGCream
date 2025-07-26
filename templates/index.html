@@ -8,13 +8,17 @@
 
     <form action="/create-todo" method="post">
         <input type="text" name="item" placeholder="Enter a new todo" required>
+        <input type="date" name="due_date" required>
         <button type="submit">Add</button>
     </form>
 
     <h2>Todo List:</h2>
     <ul>
         {% for todo in todos %}
-            <li>{{ todo }}</li>
+            <li>
+                <strong>#{{ todo.id }}</strong>: {{ todo.item }} — Due: <em>{{ todo.due_date }}</em>
+                <a href="/delete-todo/{{ todo.id }}" onclick="return confirm('Delete this todo?');">[Delete]</a>
+            </li>
         {% else %}
             <li>No todos yet!</li>
         {% endfor %}
